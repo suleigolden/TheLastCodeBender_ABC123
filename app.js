@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser'; 
-
+import gameRouter from './route/game.js';
 
 //Initilize our express application
 const app = express();
@@ -8,6 +8,7 @@ const app = express();
 //Initialize the body parser midleware
 app.use(bodyParser.json());
 
+app.use('/api/game', gameRouter);
 
 app.get('/', (req, res)=>{
     res.send('Hello World');

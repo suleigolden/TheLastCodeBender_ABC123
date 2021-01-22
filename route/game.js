@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-const letters_Answers = [
+const characters_Answers = [
     {
         A: "1",
         B: "2",
@@ -33,15 +33,16 @@ const letters_Answers = [
 ];
 
 router.get('/', (req, res)=>{
+console.log(':: '+characters_Answers['A']);
 
     res.send("<h4>****Hello, Welcome to TheLastCodeBender ABC 123 Game!****</h4><a href='game/start'>Start Game</a>");
   
 });
 router.get('/start', (req, res)=>{
-    
     res.send("<h4>If A=1 and B=2, and 3=C. What is 4</h4>");
   
 });
+
 router.get('/start:answer', (req, res)=>{
 const { answer } = req.params;
     if(answer == "4"){
@@ -50,3 +51,4 @@ const { answer } = req.params;
 });
 
 export default router;
+

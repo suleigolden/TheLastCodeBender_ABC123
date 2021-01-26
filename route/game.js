@@ -37,7 +37,11 @@ router.get('/', (req, res)=>{
   
 });
 router.get('/start', (req, res)=>{
-    res.send("<h4>If A=1 and B=2, and 3=C. What is 4</h4>");
+    const id = "2";
+    const result = all_questions.find((question) => question.id === id);
+    res.send(result.question);
+    
+    //res.send("<h4>If A=1 and B=2, and 3=C. What is 4</h4>");
   
 });
 

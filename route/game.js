@@ -1,6 +1,28 @@
 import express from 'express';
 const router = express.Router();
 
+const all_questions = [
+    {
+        id: "1",
+        question: "If A=1, B=2, C=3, What is D?",
+        answer: "4"
+    },
+    {
+        id: "2",
+        question: "If 1=A, 2=B, 3=C, What is 4?",
+        answer: "D"
+    },
+    {
+        id: "3",
+        question: "If 1=A, 2=B, 3=C, What is 7?",
+        answer: "G"
+    },
+    {
+        id: "1",
+        question: "If A=1, B=2, C=3, What is G?",
+        answer: "7"
+    },
+];
 const characters_Answers = [
     {
         A: "1", B: "2", C: "3", D: "4", E: "5",F: "6",G: "7", H: "8", I: "9", J: "10",
@@ -21,9 +43,11 @@ router.get('/start', (req, res)=>{
 
 function checkAnswer(answer){
 
+    answer = answer.toUpperCase();
+    console.log('Upper Case:: '+answer);
     for(let i = 0; i < characters_Answers.length; i++) {
         const obj = characters_Answers[i];
-        console.log('::: '+obj[answer]);
+        //console.log('::: '+obj[answer]);
         if(obj[answer] == answer){
             //console.log(obj[answer]);
             return true;
@@ -34,13 +58,17 @@ function checkAnswer(answer){
     return false;
 }
 
-router.get('/start:answer', (req, res)=>{
-const { answer } = req.params;
-const check_answer = checkAnswer(answer);
+router.get('/answer/:id', (req, res)=>{
+   
+const { id } = req.params;
+const check_answer = checkAnswer(id);
+console.log('*********:: '+id);
  if(check_answer){
      console.log('True');
+     res.send('<h1>Cooool!....</h1>');
  }else{
      console.log('false');
+     res.send('<h1>noooooop!....</h1>');
  }
 
 });

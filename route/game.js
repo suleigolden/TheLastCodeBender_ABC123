@@ -4,28 +4,28 @@ const router = express.Router();
 const all_questions = [
     {
         id: "0",
-        question: "If A=1, B=2, C=3, What is H?",
-        answer: "8"
+        description: "If A=1, B=2, C=3, What is",
+        question: "H"
     },
     {
         id: "1",
-        question: "If A=1, B=2, C=3, What is D?",
-        answer: "4"
+        description: "If A=1, B=2, C=3, What is",
+        question: "D"
     },
     {
         id: "2",
-        question: "If 1=A, 2=B, 3=C, What is 4?",
-        answer: "D"
+        description: "If 1=A, 2=B, 3=C, What is",
+        question: "4"
     },
     {
         id: "3",
-        question: "If 1=A, 2=B, 3=C, What is 7?",
-        answer: "G"
+        description: "If 1=A, 2=B, 3=C, What is",
+        question: "7"
     },
     {
         id: "4",
-        question: "If A=1, B=2, C=3, What is G?",
-        answer: "7"
+        description: "If A=1, B=2, C=3, What is",
+        question: "G"
     },
 ];
 const characters_Answers = [
@@ -49,23 +49,24 @@ router.get('/start', (req, res)=>{
     id = ''+id;
     console.log(id);
     const result = all_questions.find((question) => question.id === ""+id+"");
-    current_question = result;
-    res.send(result.question);
+    current_question = result.question;
+    let question_description = result.description+''+result.question+'?';
+    res.send(question_description);
     
 });
 
 function checkAnswer(answer){
-
+    //Convert to upper case
     answer = answer.toUpperCase();
-    console.log('Upper Case:: '+answer);
+    //console.log('Upper Case:: '+answer);
     for(let i = 0; i < characters_Answers.length; i++) {
         const obj = characters_Answers[i];
-        //console.log('::: '+obj[answer]);
+        console.log('::: '+obj[answer]);
         if(obj[answer] == answer){
             //console.log(obj[answer]);
             return true;
         }
-        
+
     }
 
     return false;
@@ -73,15 +74,19 @@ function checkAnswer(answer){
 
 router.get('/answer/:id', (req, res)=>{
    
-const { id } = req.params;
+const { id } = req.params; 
+//const question = current_question.question;
+const question_answer = current_question.answer;
 const check_answer = checkAnswer(id);
 console.log('*********:: '+id);
+//console.log('The Q:: '+current_question.question);
+
  if(check_answer){
      console.log('True');
      res.send('<h1>Cooool!....</h1>');
  }else{
      console.log('false');
-     res.send('<h1>noooooop!....</h1>');
+     res.send('<h1>Noooooop!....'+check_answer+'</h1>');
  }
 
 });

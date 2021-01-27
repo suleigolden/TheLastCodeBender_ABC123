@@ -36,6 +36,8 @@ const characters_Answers = [
     }
 ];
 
+let current_question = '';
+
 router.get('/', (req, res)=>{
 
     res.send("<h4>****Hello, Welcome to TheLastCodeBender ABC 123 Game!****</h4><a href='game/start'>Start Game</a>");
@@ -47,6 +49,7 @@ router.get('/start', (req, res)=>{
     id = ''+id;
     console.log(id);
     const result = all_questions.find((question) => question.id === ""+id+"");
+    current_question = result;
     res.send(result.question);
     
 });

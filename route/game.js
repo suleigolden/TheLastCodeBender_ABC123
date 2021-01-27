@@ -3,6 +3,11 @@ const router = express.Router();
 
 const all_questions = [
     {
+        id: "0",
+        question: "If A=1, B=2, C=3, What is H?",
+        answer: "8"
+    },
+    {
         id: "1",
         question: "If A=1, B=2, C=3, What is D?",
         answer: "4"
@@ -18,7 +23,7 @@ const all_questions = [
         answer: "G"
     },
     {
-        id: "1",
+        id: "4",
         question: "If A=1, B=2, C=3, What is G?",
         answer: "7"
     },
@@ -37,12 +42,13 @@ router.get('/', (req, res)=>{
   
 });
 router.get('/start', (req, res)=>{
-    const id = "2";
-    const result = all_questions.find((question) => question.id === id);
+    let id = Math.floor(Math.random() * 5);
+    //Convert the random num to string
+    id = ''+id;
+    console.log(id);
+    const result = all_questions.find((question) => question.id === ""+id+"");
     res.send(result.question);
     
-    //res.send("<h4>If A=1 and B=2, and 3=C. What is 4</h4>");
-  
 });
 
 function checkAnswer(answer){

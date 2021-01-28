@@ -153,6 +153,16 @@ function getCharacterToNumber($value){
 
 //const allLevelQuestion = array("BAD","GOOD","DAD","MOM","HI","TELL","BED","MAN","WOMAN","GIRL","BOY","YES","HELLO","HI","DAD","MOM","CALL","STAY");
 
+function getNextQuestion(req, res){
+    let id = Math.floor(Math.random() * 5);
+    //Convert the random num to string
+    id = ''+id;
+    console.log(id);
+    const result = all_questions.find((question) => question.id === ""+id+"");
+    current_question = result.question;
+    return 'If A = 1, B = 2, C = 3, 1 = A, 2 = B and 3 = C. What is '+current_question+'?';
+}
+
 let current_question = '';
 
 router.get('/', (req, res)=>{
@@ -161,15 +171,8 @@ router.get('/', (req, res)=>{
   
 });
 router.get('/start', (req, res)=>{
-    let id = Math.floor(Math.random() * 5);
-    //Convert the random num to string
-    id = ''+id;
-    console.log(id);
-    const result = all_questions.find((question) => question.id === ""+id+"");
-    current_question = result.question;
-    const Instruction = 'If A = 1, B = 2, C = 3, 1 = A, 2 = B and 3 = C. What is '+current_question+'?';
-    res.send(Instruction);
-    
+    //Get and display question
+    res.send(getNextQuestion());
 });
 
 function checkAnswer(question){
@@ -216,6 +219,9 @@ const check_answer = checkAnswer(current_question);
      console.log('false');
      res.send('<h1>Noooooop!....'+check_answer+'</h1>');
  }
+
+ //get and display next question 
+ res.send(getNextQuestion());
 
 });
 

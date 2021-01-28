@@ -30,6 +30,126 @@ const characters_Answers = [
         T: "20", U: "21", V: "22", W: "23", X: "24", Y: "25", Z: "26",
     }
 ];
+//Reverse Chraracter to Number
+function getCharacterToNumber($value){
+	switch($value){
+		case "A":
+		return '1';
+		case "B":
+		return '2';
+		case "C":
+		return '3';
+		case "D":
+		return '4';
+		case "E":
+		return '5';
+		case "F":
+		return '6';
+		case "G":
+		return '7';
+		case "H":
+		return '8';
+		case "I":
+		return '9';
+		case "J":
+		return '10';
+		case "K":
+		return '11';
+		case "L":
+		return '12';
+		case "M":
+		return '13';
+		case "N":
+		return '14';
+		case "O":
+		return '15';
+		case "P":
+		return '16';
+		case "Q":
+		return '17';
+		case "R":
+		return '18';
+		case "S":
+		return '19';
+		case "T":
+		return '20';
+		case "U":
+		return '21';
+		case "V":
+		return '22';
+		case "W":
+		return '23';
+		case "X":
+		return '24';
+		case "Y":
+		return '25';
+		case "Z":
+		return '26';
+		default:
+		return "";
+	}
+
+}
+//Reverse Number to Chraracter
+ function getNumberToChraracter($value){
+    switch($value){
+        case "1":
+        return "A";
+        case "2":
+        return "B";
+        case "3":
+        return "C";
+        case "4":
+        return 'D';
+        case "5":
+        return "E";
+        case "6":
+        return "F";
+        case "7":
+        return 'G';
+        case "8":
+        return "H";
+        case "9":
+        return "I";
+        case "10":
+        return "J";
+        case "11":
+        return "K";
+        case "12":
+        return "L";
+        case "13":
+        return "M";
+        case "14":
+        return "N";
+        case "15":
+        return "O";
+        case "16":
+        return "P";
+        case "17":
+        return "Q";
+        case "18":
+        return "R";
+        case "19":
+        return "S";
+        case "20":
+        return "T";
+        case "21":
+        return "U";
+        case "22":
+        return "V";
+        case "23":
+        return "W";
+        case "24":
+        return "X";
+        case "25":
+        return "Y";
+        case "26":
+        return "Z";
+        default:
+        return "";
+    }
+
+}
 
 //const allLevelQuestion = array("BAD","GOOD","DAD","MOM","HI","TELL","BED","MAN","WOMAN","GIRL","BOY","YES","HELLO","HI","DAD","MOM","CALL","STAY");
 
@@ -52,19 +172,21 @@ router.get('/start', (req, res)=>{
     
 });
 
-function checkAnswer(question,answer){
-
+function checkAnswer(question){
+  let final_answer = '';
     //Loop through question String
     for (let i = 0; i < question.length; i++) {
         let char = question[i];
         //Check if character is string or not
         if (typeof char === 'string' || char instanceof String){
             char = char.toUpperCase();
+            final_answer += getCharacterToNumber(char);
         }else{
-            // it's something else 
+            final_answer += getNumberToChraracter(char);
         }
     }
     
+    return final_answer;
     //** Start Old Answer logic ***/
     //Convert to upper case
     // answer = answer.toUpperCase();
@@ -85,13 +207,9 @@ function checkAnswer(question,answer){
 router.get('/answer/:user_answer', (req, res)=>{
    
 const { user_answer } = req.params; 
-const question = current_question.question;
-const question_answer = current_question.answer;
-const check_answer = checkAnswer(question_answer,user_answer);
-console.log('*********:: '+user_answer);
-//console.log('The Q:: '+current_question.question);
+const check_answer = checkAnswer(current_question);
 
- if(check_answer){
+ if(check_answer == user_answer){
      console.log('True');
      res.send('<h1>Cooool!....</h1>');
  }else{

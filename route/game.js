@@ -4,28 +4,23 @@ const router = express.Router();
 const all_questions = [
     {
         id: "0",
-        description: "If A=1, B=2, C=3, What is",
-        question: "H"
+        question: "BAD"
     },
     {
         id: "1",
-        description: "If A=1, B=2, C=3, What is",
-        question: "D"
+        question: "GOOD"
     },
     {
         id: "2",
-        description: "If 1=A, 2=B, 3=C, What is",
-        question: "4"
+        question: "DAD"
     },
     {
         id: "3",
-        description: "If 1=A, 2=B, 3=C, What is",
-        question: "7"
+        question: "MOM"
     },
     {
         id: "4",
-        description: "If A=1, B=2, C=3, What is",
-        question: "G"
+        question: "HI"
     },
 ];
 const characters_Answers = [
@@ -35,6 +30,8 @@ const characters_Answers = [
         T: "20", U: "21", V: "22", W: "23", X: "24", Y: "25", Z: "26",
     }
 ];
+
+//const allLevelQuestion = array("BAD","GOOD","DAD","MOM","HI","TELL","BED","MAN","WOMAN","GIRL","BOY","YES","HELLO","HI","DAD","MOM","CALL","STAY");
 
 let current_question = '';
 
@@ -50,35 +47,48 @@ router.get('/start', (req, res)=>{
     console.log(id);
     const result = all_questions.find((question) => question.id === ""+id+"");
     current_question = result.question;
-    let question_description = result.description+''+result.question+'?';
-    res.send(question_description);
+    const Instruction = 'If A = 1, B = 2, C = 3, 1 = A, 2 = B and 3 = C. What is '+current_question+'?';
+    res.send(Instruction);
     
 });
 
-function checkAnswer(answer){
-    //Convert to upper case
-    answer = answer.toUpperCase();
-    //console.log('Upper Case:: '+answer);
-    for(let i = 0; i < characters_Answers.length; i++) {
-        const obj = characters_Answers[i];
-        console.log('::: '+obj[answer]);
-        if(obj[answer] == answer){
-            //console.log(obj[answer]);
-            return true;
+function checkAnswer(question,answer){
+
+    //Loop through question String
+    for (let i = 0; i < question.length; i++) {
+        let char = question[i];
+        //Check if character is string or not
+        if (typeof char === 'string' || char instanceof String){
+            char = char.toUpperCase();
+        }else{
+            // it's something else 
         }
-
     }
+    
+    //** Start Old Answer logic ***/
+    //Convert to upper case
+    // answer = answer.toUpperCase();
+    // //console.log('Upper Case:: '+answer);
+    // for(let i = 0; i < characters_Answers.length; i++) {
+    //     const obj = characters_Answers[i];
+    //     console.log('::: '+obj[answer]);
+    //     if(obj[answer] == answer){
+    //         //console.log(obj[answer]);
+    //         return true;
+    //     }
 
-    return false;
+    // }
+    // return false;
+    //** End Old Answer logic ***/
 }
 
-router.get('/answer/:id', (req, res)=>{
+router.get('/answer/:user_answer', (req, res)=>{
    
-const { id } = req.params; 
-//const question = current_question.question;
+const { user_answer } = req.params; 
+const question = current_question.question;
 const question_answer = current_question.answer;
-const check_answer = checkAnswer(id);
-console.log('*********:: '+id);
+const check_answer = checkAnswer(question_answer,user_answer);
+console.log('*********:: '+user_answer);
 //console.log('The Q:: '+current_question.question);
 
  if(check_answer){

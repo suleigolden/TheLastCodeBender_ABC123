@@ -13,7 +13,8 @@ router.get('/', (req, res)=>{
 router.get('/start', (req, res)=>{
     //Get and display question
     let instruction = getNextQuestion();
-	res.render('game-play',{instruction:instruction});
+    let success_message = '';
+	res.render('game-play',{instruction:instruction, success_message:success_message});
 });
 
 function checkAnswer(question){
@@ -33,7 +34,13 @@ function checkAnswer(question){
     return final_answer;
     
 }
-
+//Process from form request
+router.get('/useranswer', (req, res)=>{
+   
+    const answer = req.body.answer; 
+    console.log(req.params);
+ });
+//Process from API request
 router.get('/answer/:user_answer', (req, res)=>{
    
 const { user_answer } = req.params; 
@@ -50,6 +57,7 @@ let instruction = getNextQuestion();
 res.render('game-play',{instruction:instruction, success_message:success_message});
     
 });
+
 
 export default router;
 

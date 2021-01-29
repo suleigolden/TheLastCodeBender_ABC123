@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<body>
+    <div>
+        <h4><%= instruction %></h4>
+
+        <form id="contact-form" class="contact-form col-sm-6" method="GET" action="/api/game/useranswer"> 
+            <div class="col-md-12" id="logDiv">
+                <img src="/images/MR_Logo.png" id="divLogo">
+            </div>
+            <label>Answer</label>
+           <div class="fancy-form">
+            <input type="text" class="form-control" name="answer" placeholder="Answer" required/>
+           </div> 
+           <div class="fancy-form">
+               <input type="submit" value="Submit" />
+           </div>
+          </form>
+
+    </div>
+</body>
+</html>

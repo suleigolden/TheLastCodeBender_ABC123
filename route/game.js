@@ -2,15 +2,18 @@ import express from 'express';
 const router = express.Router();
 import { getCharacterToNumber, getNumberToChraracter, getNextQuestion } from '../controllers/game_logic.js';
 
+
 let current_question = '';
 
 router.get('/', (req, res)=>{
-    res.send("<h4>****Hello, Welcome to TheLastCodeBender ABC 123 Game!****</h4><a href='game/start'>Start Game</a>");
+    let instruction ="*****How to Play ABC-123 GAME*****";
+	res.render('index',{instruction:instruction});
 });
 
 router.get('/start', (req, res)=>{
     //Get and display question
-    res.send(getNextQuestion());
+    let instruction = getNextQuestion();
+	res.render('game-play',{instruction:instruction});
 });
 
 function checkAnswer(question){
@@ -35,18 +38,17 @@ router.get('/answer/:user_answer', (req, res)=>{
    
 const { user_answer } = req.params; 
 const check_answer = checkAnswer(current_question);
+let success_message = '';
 
  if(check_answer == user_answer){
-     console.log('True');
-     res.send('<h1>Cooool!....</h1>');
+    success_message = 'Cooool!......';
  }else{
-     console.log('false');
-     res.send('<h1>Noooooop!....'+check_answer+'</h1>');
+    success_message = 'Noooooo!......';
  }
 
- //get and display next question 
- res.send(getNextQuestion());
-
+let instruction = getNextQuestion();
+res.render('game-play',{instruction:instruction, success_message:success_message});
+    
 });
 
 export default router;

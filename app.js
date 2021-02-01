@@ -17,7 +17,9 @@ app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
 
 //Initialize the body parser midleware
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 
 app.use('/api/game', gameRouter);
 

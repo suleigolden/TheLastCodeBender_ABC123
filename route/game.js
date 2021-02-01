@@ -35,10 +35,11 @@ function checkAnswer(question){
     
 }
 //Process from form request
-router.get('/useranswer', (req, res)=>{
+router.post('/useranswer', (req, res)=>{
    
-    const answer = req.body.answer; 
-    console.log(req.params);
+    console.log('Got body:', req.body);
+    res.sendStatus(200);
+    
  });
 //Process from API request
 router.get('/answer/:user_answer', (req, res)=>{

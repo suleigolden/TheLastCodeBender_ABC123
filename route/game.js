@@ -1,9 +1,7 @@
 import express from 'express';
 const router = express.Router();
-import { getCharacterToNumber, getNumberToChraracter, getNextQuestion } from '../controllers/game_logic.js';
+import { current_question,getCharacterToNumber, getNumberToChraracter, getNextQuestion } from '../controllers/game_logic.js';
 
-
-let current_question = '';
 
 router.get('/', (req, res)=>{
     let instruction ="*****How to Play ABC-123 GAME*****";
@@ -36,9 +34,18 @@ function checkAnswer(question){
 }
 //Process from form request
 router.post('/useranswer', (req, res)=>{
-   
-    console.log('Got body:', req.body);
-    res.sendStatus(200);
+    let user_answer = req.body.answer;
+    const check_answer = checkAnswer(current_question);
+    let success_message = '';
+
+    if(check_answer === user_answer){
+        success_message = 'Cooool!......';
+    }else{
+        success_message = 'Noooooo!...... '+check_answer;
+    }
+    console.log(success_message+' ::: '+check_answer);
+    let instruction = getNextQuestion();
+    res.render('game-play',{instruction:instruction, success_message:success_message});
     
  });
 //Process from API request

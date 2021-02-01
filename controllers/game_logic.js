@@ -1,6 +1,6 @@
 import { all_questions, characters_Answers } from '../model/data.js';
 
-let current_question = '';
+export let current_question = '';
 //Reverse Chraracter to Number
 export function getCharacterToNumber($value){
 	switch($value){

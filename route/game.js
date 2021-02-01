@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { getActionMessage,current_question,getCharacterToNumber, getNumberToChraracter, getNextQuestion } from '../controllers/game_logic.js';
+import { gameScore,current_score,getActionMessage,current_question,getCharacterToNumber, getNumberToChraracter, getNextQuestion } from '../controllers/game_logic.js';
 
 
 router.get('/', (req, res)=>{
@@ -12,7 +12,7 @@ router.get('/start', (req, res)=>{
     //Get and display question
     let instruction = getNextQuestion();
     let success_message = '';
-	res.render('game-play',{instruction:instruction, success_message:success_message});
+	res.render('game-play',{instruction:instruction, success_message:success_message, current_score:current_score});
 });
 
 function checkAnswer(question){
@@ -40,12 +40,14 @@ router.post('/useranswer', (req, res)=>{
 
     if(check_answer === user_answer){
         success_message = getActionMessage('correct');
+        //current_score = gameScore('correct');
     }else{
         success_message = getActionMessage('incorrect');
+        //current_score = gameScore('incorrect');
     }
     console.log(success_message+' ::: '+check_answer);
     let instruction = getNextQuestion();
-    res.render('game-play',{instruction:instruction, success_message:success_message});
+    res.render('game-play',{instruction:instruction, success_message:success_message, current_score:current_score});
     
  });
 //Process from API request
@@ -57,12 +59,14 @@ let success_message = '';
 
  if(check_answer == user_answer){
     success_message =  getActionMessage('correct');
+    //current_score = gameScore('correct');
  }else{
-    success_message =  getActionMessage('correct');
+    success_message =  getActionMessage('incorrect');
+    //current_score = gameScore('incorrect');
  }
 
 let instruction = getNextQuestion();
-res.render('game-play',{instruction:instruction, success_message:success_message});
+res.render('game-play',{instruction:instruction, success_message:success_message,current_score:current_score});
     
 });
 

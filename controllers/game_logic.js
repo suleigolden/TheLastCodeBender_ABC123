@@ -1,6 +1,7 @@
 import { all_questions, characters_Answers } from '../model/data.js';
 
 export let current_question = '';
+export let current_score = 0;
 //Reverse Chraracter to Number
 export function getCharacterToNumber($value){
 	switch($value){
@@ -139,14 +140,27 @@ export function getActionMessage(action){
     switch(action){
         case "correct":
             const random_c = Math.floor(Math.random() * correct.length);
-            //console.log(random, correct[random]);
+            gameScore(action);
             return random_c, correct[random_c];
         case "incorrect":
             const random_i = Math.floor(Math.random() * incorrect.length);
-            //console.log(random, correct[random]);
+            gameScore(action);
             return random_i, incorrect[random_i];
         default:
             return '';
     }
     
+}
+//Get game score
+export function gameScore(action){
+    switch(action){
+        case "correct":
+            current_score ++;
+        case "incorrect":
+            current_score += 0;
+        default:
+            current_score += 0;
+    }
+    
+ return current_score;
 }

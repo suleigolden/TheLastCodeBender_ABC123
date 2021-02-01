@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { current_question,getCharacterToNumber, getNumberToChraracter, getNextQuestion } from '../controllers/game_logic.js';
+import { getActionMessage,current_question,getCharacterToNumber, getNumberToChraracter, getNextQuestion } from '../controllers/game_logic.js';
 
 
 router.get('/', (req, res)=>{
@@ -39,9 +39,9 @@ router.post('/useranswer', (req, res)=>{
     let success_message = '';
 
     if(check_answer === user_answer){
-        success_message = 'Cooool!......';
+        success_message = getActionMessage('correct');
     }else{
-        success_message = 'Noooooo!...... '+check_answer;
+        success_message = getActionMessage('incorrect');
     }
     console.log(success_message+' ::: '+check_answer);
     let instruction = getNextQuestion();
@@ -56,9 +56,9 @@ const check_answer = checkAnswer(current_question);
 let success_message = '';
 
  if(check_answer == user_answer){
-    success_message = 'Cooool!......';
+    success_message =  getActionMessage('correct');
  }else{
-    success_message = 'Noooooo!......';
+    success_message =  getActionMessage('correct');
  }
 
 let instruction = getNextQuestion();

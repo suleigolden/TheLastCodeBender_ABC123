@@ -131,3 +131,22 @@ export function getNextQuestion(){
     current_question = result.question;
     return 'If A = 1, B = 2, C = 3, 1 = A, 2 = B and 3 = C. What is '+current_question+'?';
 }
+//Get action message
+export function getActionMessage(action){
+    const correct = ["WELL DONE!", "YES", "GREAT JOB", "GOD JOB", "EXCELLENT"];
+    const incorrect = ["Ooh no!", "Whoops!", "Nops.", "No!!!!"];
+
+    switch(action){
+        case "correct":
+            const random_c = Math.floor(Math.random() * correct.length);
+            //console.log(random, correct[random]);
+            return random_c, correct[random_c];
+        case "incorrect":
+            const random_i = Math.floor(Math.random() * incorrect.length);
+            //console.log(random, correct[random]);
+            return random_i, incorrect[random_i];
+        default:
+            return '';
+    }
+    
+}

@@ -21,7 +21,7 @@ body {
 
 .container {
   margin: 30px auto;
-  width: 350px;
+  width: 750px;
 }
 
 h1 {
@@ -38,6 +38,13 @@ h3 {
 h4 {
   margin: 0;
   text-transform: uppercase;
+}
+p {
+    font-size: 18px;
+    line-height: 26px;
+    color: #333;
+    font-weight: 500;
+    word-wrap: break-word;
 }
 
 .inc-exp-container {
@@ -98,6 +105,8 @@ input[type='number'] {
   margin: 10px 0 30px;
   padding: 10px;
   width: 100%;
+  text-decoration: none;
+  text-align: center;
 }
 
 .btn:focus,
@@ -148,4 +157,22 @@ input[type='number'] {
 
 .list li:hover .delete-btn {
   opacity: 1;
+}
+.text-header{
+    text-align: center;
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.text-game-header{
+    text-shadow: 2px 2px 4px #000000;
+    color: #9c88ff;
+    background-color: transparent;
+    text-align: center;
+    border: 1px #FFF solid;
+    font-size: 77px;
 }

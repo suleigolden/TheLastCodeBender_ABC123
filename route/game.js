@@ -4,7 +4,7 @@ import { gameScore,current_score,getActionMessage,current_question,getCharacterT
 
 
 router.get('/', (req, res)=>{
-    let instruction ="*****How to Play ABC-123 GAME*****";
+    let instruction ="How to Play ABC-123 GAME";
 	res.render('index',{instruction:instruction});
 });
 

@@ -19,7 +19,8 @@ app.set('view engine', 'html');
 //Initialize the body parser midleware
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+//Set Public Folder
+app.use(express.static(path.join(__dirname,'public')));
 
 app.use('/api/game', gameRouter);
 

@@ -9,10 +9,13 @@ router.get('/', (req, res)=>{
 });
 
 router.get('/start', (req, res)=>{
+    // let audio = new Audio('../public/sound/yes.mp3');
+    // audio.play();
     //Get and display question
     let instruction = getNextQuestion();
     let success_message = '';
-	res.render('game-play',{instruction:instruction, success_message:success_message, current_score:current_score});
+    let reset_score = 0;
+	res.render('game-play',{instruction:instruction, success_message:success_message, current_score:reset_score});
 });
 
 function checkAnswer(question){

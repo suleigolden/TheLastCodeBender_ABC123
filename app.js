@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import gameRouter from './route/game.js';
 import ejs from 'ejs'; 
 import path from 'path'; 
+import player from 'play-sound';
 const __dirname = path.resolve();
 
 
@@ -25,6 +26,12 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use('/api/game', gameRouter);
 
 app.get('/', (req, res)=>{
+        
+ player.play('../public/sound/yes.mp3', function (err) {
+    if (err) throw err;
+    console.log("Audio finished");
+  });
+  
     res.send('Hello World');
 });
 

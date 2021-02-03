@@ -1,4 +1,7 @@
 import express from 'express';
+import path from 'path'; 
+const __dirname = path.resolve();
+import sound from 'sound-play';
 const router = express.Router();
 import { gameScore,current_score,getActionMessage,current_question,getCharacterToNumber, getNumberToChraracter, getNextQuestion } from '../controllers/game_logic.js';
 
@@ -44,9 +47,13 @@ router.post('/useranswer', (req, res)=>{
     if(check_answer === user_answer){
         success_message = getActionMessage('correct');
         //current_score = gameScore('correct');
+        const yesPath = path.join(__dirname, "./public/sound/yes.mp3");
+        sound.play(yesPath);
     }else{
         success_message = getActionMessage('incorrect');
         //current_score = gameScore('incorrect');
+        const noPath = path.join(__dirname, "./public/sound/no.mp3");
+        sound.play(noPath);
     }
     console.log(success_message+' ::: '+check_answer);
     let instruction = getNextQuestion();
